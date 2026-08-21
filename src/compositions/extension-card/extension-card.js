@@ -34,7 +34,7 @@ export class ExtensionCard extends LitElement{
                 </div>
                 <div class="footer">
                             <type-button text="Remove"></type-button>
-                            <type-switch check>
+                            <slot name="switch"></slot>
                             </type-switch>
                 </div>
             </div>

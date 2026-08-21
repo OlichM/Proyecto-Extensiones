@@ -15,16 +15,42 @@ import { EXTENSIONS } from './data/extensions.js';
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
-  static get properties() {
-    return {
-    }
+  static properties = {
+        filter: {
+            type: String
+        },
+        extensions: {
+          type: Array
+        }
   }
 
   constructor() {
     super()
+    this.filter = 'all'
+    this.extensions = EXTENSIONS;
+  }
+  getFilterExtensions(){
+    switch(this.filter){
+        case 'active':
+          return this.extensions.filter(
+            extension => extension.active
+          );
+        case 'inactive':
+          return this.extensions.filter(
+            extension => !extension.active
+          );
+        default:
+          return this.extensions;
+    }
+  }
+  toggleExtension(index, event){
+    const updatedExtensions = [...this.extensions];
+    updatedExtensions[index].active = event.detail.check;
+    this.extensions = updatedExtensions;
   }
 
   render() {
+    const FilterExtensions = this.getFilterExtensions();
     return html`
       <extension-header>
         <type-icon 
@@ -38,21 +64,39 @@ export class MyElement extends LitElement {
           weight="bold" 
         ></type-text>
         <div class="filter">
-            <type-button text="all" variant="primary"></type-button>
-            <type-button text="active"></type-button>
-            <type-button text="inactive"></type-button>
+            <type-button 
+              text="All" 
+              variant=${this.filter === 'all' ? 'primary' : 'secondary'} 
+              @button-click=${() => this.filter = 'all'}
+            ></type-button>
+            <type-button 
+              text="Active" 
+              variant=${this.filter === 'active' ? 'primary' : 'secondary'} 
+              @button-click=${() => this.filter = 'active'}
+            ></type-button>
+            <type-button 
+              text="Inactive" 
+              variant=${this.filter === 'inactive' ? 'primary' : 'secondary'} 
+              @button-click=${() => this.filter = 'inactive'}
+            ></type-button>
         </div>
-        <extension-card 
-          title="DevLens" 
-          description="Quickly inspect page layouts and visualize element boundaries.">
-          <type-icon slot="icon" iconName="devlens"></type-icon>
-        </extension-card>
-        <extension-card 
-          title="StyleSpy"
-          description="Instantly analyze and copy CSS from any webpage element.">
-        <type-icon slot="icon" iconName="stylespy"></type-icon>
-        </extension-card>
-          
+        ${FilterExtensions.map(
+          extension => html`
+              <extension-card
+                title=${extension.title}
+                description=${extension.description}
+                .active=${extension.active}>
+              <type-icon
+                  slot='icon'
+                  iconName=${extension.icon}
+              ></type-icon>
+              <type-switch
+                slot='switch'
+                .check=${extension.active}
+                @change=${(e) => this.toggleExtension(index, e)}
+              ></type-switch>
+              </extension-card>
+          `)}
     `
   }
 }
