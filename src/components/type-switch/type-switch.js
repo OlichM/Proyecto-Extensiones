@@ -1,0 +1,37 @@
+import { LitElement, html } from "lit";
+import styles from './type-switch.css.js'
+
+export class TypeSwitch extends LitElement{
+    static properties = {
+        check: {
+            type: Boolean
+        }
+    }
+    constructor(){
+        super()
+        this.check = true;
+    }
+    toggle(){
+        this.check = !this.check;
+        this.dispatchEvent(new CustomEvent('change',{
+            detail: {
+                check:this.check
+            },
+            bubbles: true,
+            composed: true
+        }))
+    }
+    static get styles() {
+        return styles;
+    }
+    render(){
+        return html`
+            <div class="switch ${this.check ? 'on':'off'}"
+                @click=${this.toggle}>
+                <div class="tumb ${this.check ? 'right':'left'}"></div>
+            </div>
+        `
+    }
+
+}
+customElements.define('type-switch', TypeSwitch);
