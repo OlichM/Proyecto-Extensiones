@@ -20,7 +20,8 @@ export class MyElement extends LitElement {
             type: String
         },
         extensions: {
-          type: Array
+          type: Array,
+          attribute: false 
         }
   }
 
@@ -43,10 +44,17 @@ export class MyElement extends LitElement {
           return this.extensions;
     }
   }
-  toggleExtension(index, event){
-    const updatedExtensions = [...this.extensions];
-    updatedExtensions[index].active = event.detail.check;
-    this.extensions = updatedExtensions;
+  
+  toggleExtension(id, event){
+    this.extensions = this.extensions.map(extension => {
+      if(extension.id === id){
+        return {
+          ...extension,
+          active: event.detail.check
+        }
+      }
+      return extension;
+    })
   }
 
   render() {
@@ -93,7 +101,7 @@ export class MyElement extends LitElement {
               <type-switch
                 slot='switch'
                 .check=${extension.active}
-                @change=${(e) => this.toggleExtension(index, e)}
+                @change=${(e) => this.toggleExtension(extension.id, e)}
               ></type-switch>
               </extension-card>
           `)}
