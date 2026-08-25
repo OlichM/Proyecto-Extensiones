@@ -24,6 +24,13 @@ export class TypeButton extends LitElement{
             composed: true
         }))
     }
+    toggleTheme(){
+        this.dispatchEvent(
+            new CustomEvent('theme-change', {
+                bubbles: true,
+                composed: true
+            }))
+    }
     render() {
         return html`
             <button 

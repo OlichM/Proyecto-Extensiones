@@ -1,21 +1,25 @@
 import { css } from "lit";
-
 export default css`
-    .card{
-        width:320px;
-        padding:20px;
-        border-radius:20px;
+    :host {
+        display: block;
+    }
+    .card {
+        width: 100%;
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        box-sizing: border-box;
+        background-color: #e9a463;
     }
 
     .top{
         display:flex;
-        gap:16px;
+        gap:1rem;
     }
 
     .footer{
         display:flex;
         justify-content:space-between;
         align-items:center;
-        margin-top:24px;
+        margin-top: 1.5rem;
     }
 `;

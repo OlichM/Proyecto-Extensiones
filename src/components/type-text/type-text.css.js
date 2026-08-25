@@ -12,14 +12,14 @@ export default css`
     display: block;
 }   
 
-size-xs {
+.xs {
     font-size: 0.75rem;
 }
 
-size-s {
+.s {
     font-size: 1rem;
 }
-size-m {
+.m {
     font-size: 1.85rem;
 }
 

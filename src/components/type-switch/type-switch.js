@@ -11,9 +11,9 @@ export class TypeSwitch extends LitElement{
         super()
         this.check = true;
     }
-    toggle(){
+    HandleToggle(){
         this.check = !this.check;
-        this.dispatchEvent(new CustomEvent('change',{
+        this.dispatchEvent(new CustomEvent('switch-change',{
             detail: {
                 check:this.check
             },

@@ -5,8 +5,8 @@ import './components/type-button/type-button.js'
 import './components/type-switch/type-switch.js'
 import './compositions/extension-card/extension-card.js'
 import './compositions/extension-header/extension-header.js'
-import { ICONS } from './utils/icons.js';
 import { EXTENSIONS } from './data/extensions.js';
+import styles from './my-element.css.js'
 
 /**
  * An example element.
@@ -30,47 +30,41 @@ export class MyElement extends LitElement {
     this.filter = 'all'
     this.extensions = EXTENSIONS;
   }
-  getFilterExtensions(){
+  getExtensionsFilter(){
     switch(this.filter){
         case 'active':
           return this.extensions.filter(
-            extension => extension.active
+            e => e.active
           );
         case 'inactive':
           return this.extensions.filter(
-            extension => !extension.active
+            e => !e.active
           );
         default:
           return this.extensions;
     }
   }
   
-  toggleExtension(id, event){
-    this.extensions = this.extensions.map(extension => {
-      if(extension.id === id){
+  changeExtensionState(id, event){
+    this.extensions = this.extensions.map(e => {
+      if(e.id === id){
         return {
-          ...extension,
+          ...e,
           active: event.detail.check
         }
       }
-      return extension;
+      return e;
     })
   }
 
+  static get styles() {
+    return styles;
+  }
+
   render() {
-    const FilterExtensions = this.getFilterExtensions();
+    const FilterExtensions = this.getExtensionsFilter();
     return html`
       <extension-header>
-        <type-icon 
-          slot="logo"
-          iconName="logo">
-        </type-icon>
-      </extension-header>
-        <type-text 
-          text="Extension List"
-          size="xxl"
-          weight="bold" 
-        ></type-text>
         <div class="filter">
             <type-button 
               text="All" 
@@ -88,23 +82,26 @@ export class MyElement extends LitElement {
               @button-click=${() => this.filter = 'inactive'}
             ></type-button>
         </div>
+      </extension-header>
+      <div class="extension-grid">
         ${FilterExtensions.map(
-          extension => html`
-              <extension-card
-                title=${extension.title}
-                description=${extension.description}
-                .active=${extension.active}>
+          e => html`
+            <extension-card
+                title=${e.title}
+                description=${e.description}
+                .active=${e.active}>
               <type-icon
                   slot='icon'
-                  iconName=${extension.icon}
+                  iconName=${e.icon}
               ></type-icon>
               <type-switch
                 slot='switch'
-                .check=${extension.active}
-                @change=${(e) => this.toggleExtension(extension.id, e)}
+                .check=${e.active}
+                @switch-change=${(e) => this.changeExtensionState(e.id, e)}
               ></type-switch>
-              </extension-card>
+            </extension-card>
           `)}
+      </div>
     `
   }
 }

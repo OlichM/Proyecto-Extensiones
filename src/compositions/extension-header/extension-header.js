@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 import styles from "./extension-header.css.js"
+import '../../components/type-icon/type-icon.js'
 
 export class ExtensionHeader extends LitElement{
     static properties = {
@@ -15,9 +16,18 @@ export class ExtensionHeader extends LitElement{
         return html`
             <div class="header">
                 <div class="left">
-                    <slot name="logo"> </slot>
+                    <type-icon iconName="logo"></type-icon>
+                    <type-text 
+                        text="Extension List"
+                        size="m"
+                        weight="bold" 
+                    ></type-text>
                 </div>
-                <div class="theme"></div>
+                <div class="theme">
+                    <type-button iconName="icon-sun"
+                        @theme-change=${this.changeTheme}
+                    ></type-button>
+                </div>
             </div>
             <slot></slot>
         `

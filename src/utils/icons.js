@@ -11,5 +11,7 @@ export const ICONS = {
     gridguides: '/icons/logo-grid-guides.svg',
     palettepicker: '/icons/logo-palette-picker.svg',
     domsnapshot: '/icons/logo-dom-snapshot.svg',
-    consoleplus: '/icons/logo-console-plus.svg'
+    consoleplus: '/icons/logo-console-plus.svg',
+    sun: '/icons/icon-sun.svg',
+    moon: '/icons/icon-moon.svg'
 };
