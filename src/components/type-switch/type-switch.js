@@ -27,7 +27,7 @@ export class TypeSwitch extends LitElement{
     render(){
         return html`
             <div class="switch ${this.check ? 'on':'off'}"
-                @click=${this.toggle}>
+                @click=${this.HandleToggle}>
                 <div class="tumb ${this.check ? 'right':'left'}"></div>
             </div>
         `

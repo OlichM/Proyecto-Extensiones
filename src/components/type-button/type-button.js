@@ -8,12 +8,16 @@ export class TypeButton extends LitElement{
         },
         variant: {
             type: String
+        },
+        darkMode: {
+            type: Boolean
         }
     }
     constructor(){
         super()
         this.text = '';
         this.variant = '';
+        this.darkMode = false;
     }
     static get styles() {
         return styles;
@@ -24,20 +28,14 @@ export class TypeButton extends LitElement{
             composed: true
         }))
     }
-    toggleTheme(){
-        this.dispatchEvent(
-            new CustomEvent('theme-change', {
-                bubbles: true,
-                composed: true
-            }))
-    }
     render() {
         return html`
             <button 
-                class="${this.variant}"
+                class="${this.darkMode ? 'dark' : 'light'} ${this.variant}" 
                 @click=${this._handleClick}
                 >
                 ${this.text}
+                <slot></slot>
             </button>
         `
     }

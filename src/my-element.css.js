@@ -3,9 +3,21 @@ import { css } from "lit";
 export default css`
   :host {
     display: block;
-    max-width: 1200px;
+    min-height: 100vh;
+    background: #040d2e;
+  }
+
+  .container {
+    max-width: 1400px;
     margin: 0 auto;
     padding: 1rem;
+  }
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .filter {
@@ -32,4 +44,18 @@ export default css`
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+.theme {
+  min-height: 100vh;
+}
+
+.light {
+  background: #f5f5f5;
+  color: #000;
+}
+
+.dark {
+  background: #091235;
+  color: #fff;
+}
 `;

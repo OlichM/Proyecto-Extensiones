@@ -11,6 +11,9 @@ export class ExtensionCard extends LitElement{
         description: {
             type: String
         },
+        darkMode: {
+            type: Boolean
+        }
     }
     constructor(){
         super()
@@ -22,7 +25,7 @@ export class ExtensionCard extends LitElement{
     }
     render(){
         return html`
-            <div class="card">
+            <div class="card ${this.darkMode ? 'dark' : 'light'}">
                 <div class="top">
                     <div class="icon">
                         <slot name="icon"></slot>

@@ -14,4 +14,11 @@ export default css`
         height: auto;
         object-fit: contain;
     }
+    .logo-light {
+        color: white;
+    }
+
+    .logo-dark {
+        color: #091540;
+    }
 `;

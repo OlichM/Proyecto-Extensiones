@@ -6,6 +6,9 @@ export class TypeIcon extends LitElement{
     static properties = {
         iconName: {
             type: String
+        },
+        darkMode:{
+            type: Boolean
         }
     }
     constructor(){
@@ -19,7 +22,7 @@ export class TypeIcon extends LitElement{
         const icon = ICONS[this.iconName];
         return html`
             <img src="${icon}"
-                class="${this.iconName === 'logo' ? 'logo-icon' : 'icon'}">
+                class="${this.darkMode ? 'logo-light' : 'logo-dark'} ${this.iconName === 'logo' ? 'logo-icon' : 'icon'}">
         `;
         }
         

@@ -8,7 +8,7 @@ export default css`
         padding: 1.25rem;
         border-radius: 1.25rem;
         box-sizing: border-box;
-        background-color: #e9a463;
+        background-color: #ebe7e5;
     }
 
     .top{
@@ -21,5 +21,14 @@ export default css`
         justify-content:space-between;
         align-items:center;
         margin-top: 1.5rem;
+    }
+    .dark {
+    background: #1f2538;
+    color: white;
+    }
+
+    .light {
+    background: white;
+    color: black;
     }
 `;
