@@ -7,22 +7,16 @@ export default css`
         align-items: center;
         padding: 1rem 1.5rem;
         border-radius: 1rem;
+        margin-bottom: 2rem;
     }
-
     .logo-container {
         display: flex;
         align-items: center;
     }
-
-    .actions {
-        display: flex;
-        align-items: center;
-        width: 48px;
-        height: 48px;
+    .light {
+    background-color: #eaebec;
     }
-
-    .logo-container {
-        display: flex;
-        align-items: center;
+    .dark {
+    background-color: #1f2538;
     }
 `;

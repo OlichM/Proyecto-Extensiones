@@ -5,9 +5,8 @@ export default css`
         display: block;
     }
     .icon {
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
+        width: 48px;
+        height: 48px;
     }
     .logo-icon {
         width: 120px;
@@ -17,8 +16,12 @@ export default css`
     .logo-light {
         color: white;
     }
-
     .logo-dark {
         color: #091540;
+    }
+    .theme-icon {
+        width: 20px;
+        height: 20px;
+        display: block;
     }
 `;

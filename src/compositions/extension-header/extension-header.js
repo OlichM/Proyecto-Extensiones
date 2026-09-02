@@ -16,7 +16,7 @@ export class ExtensionHeader extends LitElement{
         return styles;
     }
 
-    toogleTheme(){
+    themeSwitchButton(){
         this.dispatchEvent(new CustomEvent('theme-change', {
             bubbles: true,
             composed: true
@@ -24,15 +24,14 @@ export class ExtensionHeader extends LitElement{
     }
     render(){
         return html`
-            <div class="header">
+            <div class="header ${this.darkMode ? 'dark' : 'light'}">
                 <div class="logo-container">
                     <type-icon iconName="logo"></type-icon>
                 </div>
-                <div class="actions">
+                <div>
                     <type-button 
-                        variant="theme"
                         .darkMode=${this.darkMode} 
-                        @button-click=${this.toogleTheme}>
+                        @button-click=${this.themeSwitchButton}>
                         <type-icon 
                             iconName=${this.darkMode ? 'sun' : 'moon'}>
                         </type-icon>

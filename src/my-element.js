@@ -7,7 +7,6 @@ import './compositions/extension-card/extension-card.js'
 import './compositions/extension-header/extension-header.js'
 import { EXTENSIONS } from './data/extensions.js';
 import styles from './my-element.css.js'
-import { repeat } from 'lit/directives/repeat.js'
 
 /**
  * An example element.
@@ -51,18 +50,34 @@ export class MyElement extends LitElement {
   }
   
   changeExtensionState(id, event){
-    this.extensions = this.extensions.map(extension => {
-      if(extension.id === id){
-        return {
-          ...extension,
-          active: event.detail.check  
+      this.extensions = this.extensions.map(extension => {
+        if(extension.id === id){
+          return {
+            ...extension,
+            active: event.detail.check  
+          }
         }
-      }
-      return extension;
-    })
+        return extension;
+      })
+        this.extensions.sort((a, b) => {
+        return Number(b.active) - Number(a.active);
+    });
   }
   toggleTheme() {
     this.darkMode = !this.darkMode;
+    document.body.classList.toggle(
+    'dark-theme',
+    this.darkMode
+  );
+    }
+  removeExtension(id) {
+      const confirmed = confirm(
+          '¿Deseas eliminar esta extensión?'
+      );
+      if (!confirmed) return;
+      this.extensions = this.extensions.filter(
+          extension => extension.id !== id
+      );
   }
   static get styles() {
     return styles;
@@ -75,23 +90,26 @@ export class MyElement extends LitElement {
           <extension-header .darkMode=${this.darkMode} @theme-change=${this.toggleTheme}> 
             <div class="header-content">
               <type-text 
-                text="Extension List" 
+                text="Extensions List" 
                 size="m"
                 weight="bold"
               ></type-text>
               <div class="filter">
                   <type-button 
                     text="All" 
+                    .darkMode=${this.darkMode}
                     variant=${this.filter === 'all' ? 'primary' : 'secondary'} 
                     @button-click=${() => this.filter = 'all'}
                   ></type-button>
                   <type-button 
                     text="Active" 
+                    .darkMode=${this.darkMode}
                     variant=${this.filter === 'active' ? 'primary' : 'secondary'} 
                     @button-click=${() => this.filter = 'active'}
                   ></type-button>
                   <type-button 
                     text="Inactive" 
+                    .darkMode=${this.darkMode}
                     variant=${this.filter === 'inactive' ? 'primary' : 'secondary'} 
                     @button-click=${() => this.filter = 'inactive'}
                   ></type-button>
@@ -99,14 +117,14 @@ export class MyElement extends LitElement {
             </div>
           </extension-header>
           <div class="extension-grid">
-            ${repeat( this.getExtensionsFilter(),
-
+            ${this.getExtensionsFilter().map(
               extension => html`
                 <extension-card
                     title=${extension.title}
                     description=${extension.description}
                     .active=${extension.active}
-                    .darkMode=${this.darkMode}>
+                    .darkMode=${this.darkMode}
+                    @remove-extension=${() => this.removeExtension(extension.id)}>
                   <type-icon
                       slot='icon'
                       iconName=${extension.icon}

@@ -22,7 +22,9 @@ export class TypeIcon extends LitElement{
         const icon = ICONS[this.iconName];
         return html`
             <img src="${icon}"
-                class="${this.darkMode ? 'logo-light' : 'logo-dark'} ${this.iconName === 'logo' ? 'logo-icon' : 'icon'}">
+                class="${this.darkMode ? 'logo-light' : 'logo-dark'} 
+                ${this.iconName === 'logo' ? 'logo-icon' : 
+                    this.iconName === 'sun'  ||  this.iconName === 'moon' ? 'theme-icon' : 'icon'}">
         `;
         }
         

@@ -5,8 +5,8 @@ export default css`
     display:inline-block;
     }
     .switch{
-    width:50px;
-    height:28px;
+    width:42px;
+    height:24px;
     border-radius:20px;
     position:relative;
     cursor:pointer;
@@ -19,8 +19,8 @@ export default css`
     background:#52576e;
     }
     .tumb{
-    width:22px;
-    height:22px;
+    width:18px;
+    height:18px;
     border-radius:50%;
     background:white;
     position:absolute;

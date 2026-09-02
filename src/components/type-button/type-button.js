@@ -28,6 +28,7 @@ export class TypeButton extends LitElement{
             composed: true
         }))
     }
+    
     render() {
         return html`
             <button 

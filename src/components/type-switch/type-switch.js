@@ -12,10 +12,9 @@ export class TypeSwitch extends LitElement{
         this.check = true;
     }
     HandleToggle(){
-        this.check = !this.check;
         this.dispatchEvent(new CustomEvent('switch-change',{
             detail: {
-                check:this.check
+                check: !this.check
             },
             bubbles: true,
             composed: true

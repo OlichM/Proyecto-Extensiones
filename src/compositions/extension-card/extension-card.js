@@ -20,6 +20,14 @@ export class ExtensionCard extends LitElement{
         this.title = '';
         this.description = '';
     }
+    handleRemove() {
+        this.dispatchEvent(
+            new CustomEvent('remove-extension', {
+                bubbles: true,
+                composed: true
+            })
+        );
+    }
     static get styles(){
         return styles;
     }
@@ -27,7 +35,7 @@ export class ExtensionCard extends LitElement{
         return html`
             <div class="card ${this.darkMode ? 'dark' : 'light'}">
                 <div class="top">
-                    <div class="icon">
+                    <div>
                         <slot name="icon"></slot>
                     </div>
                     <div class="content">
@@ -36,7 +44,11 @@ export class ExtensionCard extends LitElement{
                     </div>    
                 </div>
                 <div class="footer">
-                            <type-button text="Remove"></type-button>
+                            <type-button 
+                                text="Remove" 
+                                variant="remove" 
+                                .darkMode=${this.darkMode} 
+                                @button-click=${this.handleRemove}></type-button>
                             <slot name="switch"></slot>
                 </div>
             </div>
